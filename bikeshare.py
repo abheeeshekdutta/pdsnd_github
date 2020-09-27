@@ -146,7 +146,7 @@ def user_stats(df):
     if 'Gender' in df.columns:
         print(df['Gender'].value_counts())
     else:
-        print('\nGender information unavailable for Washington data')
+        print('\nGender information unavailable')
 
 
 
