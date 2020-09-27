@@ -146,7 +146,7 @@ def user_stats(df):
     if 'Gender' in df.columns:
         print(df['Gender'].value_counts())
     else:
-        print('\nGender information unavailable')
+        print('\nGender information unavailable for Washington data')
 
 
 
@@ -169,7 +169,7 @@ def main():
         df = load_data(city, month, day)
         time_stats(df)
 
-        #Drop temporary columns, as they're no longer required in the dataframe
+        #Remove temporary columns from dataframe
         df.drop(columns = ['Month', 'Day Of Week', 'Start Hour'], inplace=True)
 
         station_stats(df)
