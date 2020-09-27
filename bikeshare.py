@@ -170,7 +170,7 @@ def main():
         df = load_data(city, month, day)
         time_stats(df)
 
-        #Drop temporary columns, as they're no longer required in the dataframe
+        #Remove temporary columns from dataframe
         df.drop(columns = ['Month', 'Day Of Week', 'Start Hour'], inplace=True)
 
         station_stats(df)
