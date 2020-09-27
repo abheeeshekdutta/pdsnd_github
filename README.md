@@ -6,10 +6,13 @@ The README file was created on September 27, 2020
 Explore US Bikeshare data
 
 ### Description
-Describe what your project is about and what it does
+This project provides an interactive experience to the user to view bike sharing
+data in the US, for Chicago, Washington and New York City. The project has been
+developed using Python.
 
 ### Files used
-Include the files used
+Python script - bikeshare.py
+Data files - chicago.csv, new_york_city.csv, washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+https://pandas.pydata.org/docs/
