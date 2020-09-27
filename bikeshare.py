@@ -48,7 +48,8 @@ def load_data(city, month, day):
     """
     #Filter by city first
     df = pd.read_csv(CITY_DATA[city],index_col=0)
-  
+
+    #Loop which asks user if he wants to see raw data
     while True:
         show_data = input('\nWould you like to see raw data for '+ city +'? Enter yes or no.\n')
         if show_data.lower() != 'yes':
@@ -56,18 +57,18 @@ def load_data(city, month, day):
         else:
             print(df.sample(n = 5))
             print('-'*40)
-    
+
     #Convert start and end time columns to datetime type
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['End Time'] = pd.to_datetime(df['End Time'])
-    
+
     print('-'*40)
     print('\nExtracting month, day of week and hour from Start Time...')
     df['Month'] = df['Start Time'].apply(lambda x: x.strftime('%B').lower())
     df['Day Of Week'] = df['Start Time'].apply(lambda x: x.strftime('%A').lower())
     df['Start Hour'] = df['Start Time'].apply(lambda x: x.strftime('%-I %p'))
-    
-    
+
+
     #Filter by month IF month is not given as 'all'. If all was mentioned, skip this filtering code
     if(month != 'all'):
         df = df[df['Month'] == month]
@@ -75,13 +76,13 @@ def load_data(city, month, day):
     #Filter by day IF day is not given as 'all'. If all was mentioned, skip this filtering code
     if(day != 'all'):
         df = df[df['Day Of Week'] == day]
-        
-    
+
+
     return df
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
-    
+
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
@@ -147,12 +148,12 @@ def user_stats(df):
         print(df['Gender'].value_counts())
     else:
         print('\nGender information unavailable for Washington data')
-        
-    
+
+
 
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
-        
+
         print('\nThe earliest year of birth is : ' + str(df[df['Birth Year'].notnull()]['Birth Year'].min()))
         print('The most recent year of birth is : ' + str(df[df['Birth Year'].notnull()]['Birth Year'].max()))
         print('The most common year of birth is : ' + str(df[df['Birth Year'].notnull()]['Birth Year'].mode()[0]))
@@ -168,12 +169,12 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
         time_stats(df)
-        
+
         #Drop temporary columns, as they're no longer required in the dataframe
         df.drop(columns = ['Month', 'Day Of Week', 'Start Hour'], inplace=True)
-        
-        station_stats(df)        
-        
+
+        station_stats(df)
+
         trip_duration_stats(df)
         user_stats(df)
 
